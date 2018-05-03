@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from pymongo import MongoClient
 #include pprint for readabillity of the
 from pprint import pprint

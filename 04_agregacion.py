@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from pymongo import MongoClient
 # Connect to the MongoDB, change the connection string per your MongoDB environment
 client = MongoClient(port=27017)

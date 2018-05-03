@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ## recuerda instalar pymongo
 # python -m pip install pymongo
 

@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 from pymongo import MongoClient
 from random import randint
 #Step 1: Connect to MongoDB - Note: Change connection string as needed
-client = MongoClient()
+#client = MongoClient()
+client = MongoClient("mongodb://localhost:27017/business")
 #Selecciona la base de datos
 db=client.business
 #Step 2: Create sample data
