@@ -27,6 +27,7 @@ print(resultado.inserted_id)
 objeto=reviews.find_one(
     {'_id': ObjectId(resultado.inserted_id)})
 print("Objeto encontrado por ID:",objeto)
+print("Nombre del Objeto:",objeto['name'])
 
 objeto=reviews.find_one_and_update(
     {'_id': ObjectId(resultado.inserted_id)},
