@@ -2,6 +2,7 @@
 from bson.objectid import ObjectId
 import pymongo
 from pymongo import MongoClient, ReturnDocument
+import random
 # pprint library is used to make the output look more pretty
 from pprint import pprint
 # connect to MongoDB, change the << MONGODB URL >> to reflect your own connection string
@@ -52,13 +53,27 @@ for item in result:
     print(item)
 
 result = reviews.find({'rating': 5, 'cuisine': "Pizza"})\
-    .limit(10).skip(10).sort("name")
+    .limit(10).skip(10).sort("name",pymongo.DESCENDING)
 print("resultados de ordenación por nombre ascendente")
 for item in result:
     print(item)
 
-result = reviews.find({'rating': 5, 'cuisine': "Pizza"})\
-    .limit(10).skip(10).sort("name",pymongo.DESCENDING)
+result = reviews.find({})
 print("Resultados de ordenación descendente")
+for item in result:
+    print(item)
+    print(item.get("_id"))
+    reviews.find_one_and_update(
+        {
+            '_id':ObjectId(item.get('_id'))
+        },
+        {
+            '$set':{'campo':random.random()}
+        }
+    )
+
+result = reviews.find({'rating': 5, 'cuisine': "Pizza"})\
+    .limit(10).skip(10).sort("name")
+print("resultados de ordenación por nombre ascendente")
 for item in result:
     print(item)
