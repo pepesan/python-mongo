@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
+import pprint
+from bson.son import SON
 # Connect to the MongoDB, change the connection string per your MongoDB environment
 client = MongoClient(port=27017)
 # Set the db object to point to the business database
@@ -28,3 +30,20 @@ stargroup=db.reviews.aggregate(
 # Print the result
 for group in stargroup:
     print(group)
+
+
+result = db.things.insert_many([{"x": 1, "tags": ["dog", "cat"]},
+                                 {"x": 2, "tags": ["cat"]},
+                                 {"x": 2, "tags": ["mouse", "cat", "dog"]},
+                                {"x": 3, "tags": []}])
+print(result.inserted_ids)
+
+
+
+pipeline = [
+     {"$unwind": "$tags"},
+     {"$group": {"_id": "$tags", "count": {"$sum": 1}}},
+     {"$sort": SON([("count", -1), ("_id", -1)])}
+ ]
+
+pprint.pprint(list(db.things.aggregate(pipeline)))
