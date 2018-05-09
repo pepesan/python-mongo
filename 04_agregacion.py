@@ -47,3 +47,23 @@ pipeline = [
  ]
 
 pprint.pprint(list(db.things.aggregate(pipeline)))
+
+
+result = db.things.insert_many([{"x": 1, "total":40, "lines": [{"total":20}, {"total":20}]},
+                                 {"x": 2, "total":20, "lines": [{"total":10}, {"total":10}]},
+                                 {"x": 2, "total":50,"lines": [{"total":20}, {"total":20},{"total":10}]},
+                                {"x": 3, "total":0,"lines": []}])
+print(result.inserted_ids)
+
+
+
+pipeline = [
+    {"$group": {"_id": "$x", "media": {"$avg": "$total"}}}
+ ]
+
+pprint.pprint(list(db.things.aggregate(pipeline)))
+pipeline = [
+    {"$group": {"_id": "$x", "total": {"$sum": "$total"}}}
+ ]
+
+pprint.pprint(list(db.things.aggregate(pipeline)))
