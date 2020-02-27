@@ -26,7 +26,7 @@ for index, item in df.iterrows():
     #print(item['Region'])
     #print(item['Order ID'])
     if order_id == None:
-        order_id = item ['Order ID']
+        order_id = item['Order ID']
     else:
         if order_id == item['Order ID']:
             print("coincidencia: " + order_id)
@@ -34,6 +34,6 @@ for index, item in df.iterrows():
     for col in columns:
         object[col] = item[col]
     #print(object)
-    result = db.sales.insert_one(object)
+    #result = db.sales.insert_one(object)
     if index % 10000 == 0:
-        print(index)
+        print("Indice: "+ str(index))
